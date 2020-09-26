@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: opeco17/web:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3030
+      - name: nginx
+        image: opeco17/web_nginx:latest
+        env:
+          - name: BACKEND_HOST
+            value: localhost:3030
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+      nodeSelector:
+        type: k8s1
