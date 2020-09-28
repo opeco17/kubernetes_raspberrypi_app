@@ -1,11 +1,10 @@
 from flask_wtf import FlaskForm
 from wtforms import SelectField, SubmitField
 
-from run import hair_colors, eye_colors
+from config import Config
 
 
 class TagSelectForm(FlaskForm):
-    hair_color = SelectField('Hair Color', choices=hair_colors)
-    eye_color = SelectField('Eye Color', choices=eye_colors)
+    hair_color = SelectField('Hair Color', choices=Config.HAIR_COLORS)
     submit = SubmitField('Submit')
     

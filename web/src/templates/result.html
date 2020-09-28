@@ -1,0 +1,22 @@
+
+{% extends "base.html" %}
+
+{% block app_content %}
+<h4>オリジナルイラストを生成しました。</h4>
+<br>
+<div class="card card-body bg-light" style="clear:both;">
+    <div class="imgs">
+        {% for img in imgs1 %}
+            <img src="{{ img }}" width="130" height="130">
+        {% endfor %}
+        <br><br>
+        {% for img in imgs2 %}
+            <img src="{{ img }}" width="130" height="130">
+        {% endfor %}    
+    </div>
+</div>
+<br><br>
+<a href="{{ url_for('index')}}">はじめのページへ戻る</a>
+{% endblock %}
+
+

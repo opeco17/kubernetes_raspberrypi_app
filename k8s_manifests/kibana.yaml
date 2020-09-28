@@ -29,7 +29,7 @@ spec:
       containers:
       - name: kibana
         image: docker.elastic.co/kibana/kibana:7.8.0
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         env:
           - name: ELASTICSEARCH_URL
             value: http://elasticsearch:9200
