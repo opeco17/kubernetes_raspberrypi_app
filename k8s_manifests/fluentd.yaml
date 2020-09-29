@@ -1,3 +1,41 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluentd
+  namespace: kube-system
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: fluentd
+  namespace: kube-system
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: fluentd
+roleRef:
+  kind: ClusterRole
+  name: fluentd
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: fluentd
+  namespace: kube-system
+
+---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
@@ -17,52 +55,34 @@ spec:
         k8s-app: fluentd-logging
         version: v1
     spec:
+      serviceAccount: fluentd
+      serviceAccountName: fluentd
       tolerations:
       - key: node-role.kubernetes.io/master
         effect: NoSchedule
       containers:
       - name: fluentd
-        image: fluent/fluentd-kubernetes-daemonset:v1-debian-elasticsearch
+        image: fluent/fluentd-kubernetes-daemonset:v1.11.2-debian-elasticsearch7-arm64-1.0
         env:
           - name:  FLUENT_ELASTICSEARCH_HOST
-            value: "elasticsearch-logging"
+            value: "elasticsearch"
           - name:  FLUENT_ELASTICSEARCH_PORT
             value: "9200"
           - name: FLUENT_ELASTICSEARCH_SCHEME
             value: "http"
-          # Option to configure elasticsearch plugin with self signed certs
-          # ================================================================
-          - name: FLUENT_ELASTICSEARCH_SSL_VERIFY
-            value: "true"
-          # Option to configure elasticsearch plugin with tls
-          # ================================================================
-          - name: FLUENT_ELASTICSEARCH_SSL_VERSION
-            value: "TLSv1_2"
-          # X-Pack Authentication
-          # =====================
           - name: FLUENT_ELASTICSEARCH_USER
             value: "elastic"
           - name: FLUENT_ELASTICSEARCH_PASSWORD
             value: "changeme"
-          # Logz.io Authentication
-          # ======================
-          - name: LOGZIO_TOKEN
-            value: "ThisIsASuperLongToken"
-          - name: LOGZIO_LOGTYPE
-            value: "kubernetes"
-        resources:
-          limits:
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 200Mi
+          - name: FLUENT_UID
+            value: "0"
         volumeMounts:
         - name: varlog
           mountPath: /var/log
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
-      terminationGracePeriodSeconds: 30
+      terminationGracePeriodSeconds: 10
       volumes:
       - name: varlog
         hostPath:
