@@ -1,6 +1,9 @@
 import base64
 
 import glob
+import requests
+
+from config import Config
 
 
 def get_encode_imgs(label, num):
@@ -14,3 +17,11 @@ def get_encode_imgs(label, num):
         img_bytes.append(img_byte)
     return img_bytes
         
+
+def get_encode_imgs_external(label):
+    response = requests.post(Config.ML_API_URI, )
+    headers = {'Content-Type': 'application/json'}
+    data = {'label': label}
+    response = requests.get(Config.ML_API_URI, headers=headers, json=data)
+    img_bytes = response.json().get('img_bytes')
+    return img_bytes

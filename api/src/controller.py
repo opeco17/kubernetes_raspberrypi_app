@@ -6,9 +6,11 @@ from config import Config
 from model import get_encode_imgs
 from run import app
 
+
 @app.route('/', methods=['GET'])
 def index():
     return 'This is api!'
+
 
 @app.route('/img_bytes', methods=['GET'])
 def img_bytes():
