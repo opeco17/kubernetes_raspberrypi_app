@@ -1,3 +1,3 @@
 # kubernetes_raspberrypi_app
 
-<img width="750" alt="スクリーンショット 2020-09-29 10 49 35" src="https://user-images.githubusercontent.com/46510874/94579423-c4dab080-02b3-11eb-8b97-3cbaaa6cf61a.png">
+<img width="750" alt="arch" src="https://user-images.githubusercontent.com/46510874/94634420-f6329b00-030a-11eb-9ae1-b05951d3ace9.png">
