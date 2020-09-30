@@ -39,3 +39,4 @@ class Sampler(object):
         pseudo_labels = pseudo_labels.type(torch.long).to(device)
         return pseudo_labels
         
+

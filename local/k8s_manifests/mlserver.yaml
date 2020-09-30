@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlserver
+spec:
+  selector:
+    app: mlserver
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 80
+  type: NodePort
+
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlserver
+spec:
+  selector:
+    matchLabels:
+      app: mlserver
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mlserver
+    spec:
+      containers:
+      - name: mlserver
+        image: opeco17/mlserver:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3030
+      - name: nginx
+        image: opeco17/mlserver_nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80

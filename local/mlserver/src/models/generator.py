@@ -24,16 +24,7 @@ def pil2cv(image):
     return new_image
 
 
-def generate(label):
-    hair_colors = ['pink', 'blue', 'brown', 'silver', 'blonde', 'red', 'black', 'white', 'purple']
-    hair_colors_index_mapper =  {hair_color: index  for index, hair_color in enumerate(hair_colors)}
-
-    gen = ResNetGenerator(num_classes=len(hair_colors))
-    gen.load_state_dict(torch.load('./gen_parameter.pth', map_location=torch.device('cpu')))
-    gen.eval()
-
-
-    # APIを想定
+def generate(label, gen, hair_colors, hair_colors_index_mapper):
     label = 'pink'
     index = hair_colors_index_mapper.get(label)
 

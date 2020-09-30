@@ -125,3 +125,4 @@ class ResNetGenerator(nn.Module):
         h = self.activation(h)
         h = self.conv6(h)
         return torch.tanh(h)
+
