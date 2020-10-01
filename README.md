@@ -1,3 +1,6 @@
+# Demonstration
+<img width="700" src="https://user-images.githubusercontent.com/46510874/94759264-5c3a2380-03da-11eb-8c51-be8b5781d50a.gif">
+
 # Architecture
 
 <img width="750" alt="arch" src="https://user-images.githubusercontent.com/46510874/94634605-6f31f280-030b-11eb-80a9-1dcb184fd498.png">
