@@ -6,7 +6,7 @@ OS: Ubuntu 20.04.1 LTS
 
 
 # Raspberry Pi
-<img width="600" alt="raspi" src="https://user-images.githubusercontent.com/46510874/94757089-44f83780-03d4-11eb-99ea-4b110207a8e4.jpg">
+<img width="550" alt="raspi" src="https://user-images.githubusercontent.com/46510874/94757089-44f83780-03d4-11eb-99ea-4b110207a8e4.jpg">
 
 Raspberry Pi 4 Model B 8GB x 3
 
